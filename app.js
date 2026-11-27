@@ -27,8 +27,8 @@ const bg = c => `background-color:${c};background-image:url('${IMG}')`;
 
 // ---------- état ----------
 const store = {
-  get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch { return d; } },
-  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }
+  get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
 };
 let cart = store.get('frao-cart', []);
 const ui = { fam:'Tous', sort:'pop', size:10, qty:1, added:'' };
@@ -39,8 +39,14 @@ const shipFor = sub => (sub >= FREE_FROM || !sub) ? 0 : SHIPPING;
 
 function addItem(item, qty) {
   const l = cart.find(x => x.key === item.key);
-  if (l) l.qty += qty; else cart.push({ ...item, qty });
+  if (l) l.qty += qty; else cart.push(Object.assign({}, item, { qty: qty }));
   saveCart();
+}
+function toast(msg) {
+  let t = document.getElementById('toast');
+  if (!t) { t = document.createElement('div'); t.id = 'toast'; t.setAttribute('role','status'); document.body.appendChild(t); }
+  t.textContent = msg; t.className = 'show';
+  clearTimeout(toast.h); toast.h = setTimeout(() => { t.className = ''; }, 2500);
 }
 function renderCount() { document.getElementById('count').textContent = cartCount(); }
 
@@ -133,12 +139,12 @@ app.addEventListener('click', e => {
   else if (t.id === 'add') {
     const p = P.find(x => x.id === d.id);
     addItem({ key:p.id+'-'+ui.size, name:p.name, sub:ui.size+' ml', color:p.color, unit:price(p, ui.size) }, ui.qty);
-    ui.added = `Ajouté au panier — ${ui.qty} × ${p.name} ${ui.size} ml`; refresh();
+    ui.added = `Ajouté au panier — ${ui.qty} × ${p.name} ${ui.size} ml`; refresh(); toast(ui.added);
   }
   else if (d.set) {
     const c = SETS.find(x => x.id === d.set);
     addItem({ key:c.id, name:c.name, sub:`Coffret · ${c.n} × 5 ml`, color:c.color, unit:c.price }, 1);
-    t.textContent = 'Ajouté ✓'; setTimeout(() => { t.textContent = 'Ajouter'; }, 1200);
+    toast('Coffret ajouté au panier'); t.textContent = 'Ajouté ✓'; setTimeout(() => { t.textContent = 'Ajouter'; }, 1200);
   }
   else if (d.chg) { const l = cart.find(x => x.key === d.chg); if (l) { l.qty = Math.max(1, l.qty + +d.d); saveCart(); refresh(); } }
   else if (d.rm) { cart = cart.filter(x => x.key !== d.rm); saveCart(); refresh(); }
@@ -147,7 +153,8 @@ app.addEventListener('change', e => { if (e.target.id === 'sort') { ui.sort = e.
 app.addEventListener('submit', e => {
   if (e.target.id !== 'checkout') return;
   e.preventDefault();
-  const form = e.target, v = Object.fromEntries(new FormData(form));
+  const form = e.target, v = {};
+  ['nom','email','adresse','cp','ville'].forEach(k => { v[k] = form.elements[k].value; });
   const rules = {
     nom: s => s.trim().length >= 2 || 'Indiquez votre nom.',
     email: s => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s) || 'E-mail invalide.',
@@ -164,7 +171,7 @@ app.addEventListener('submit', e => {
   }
   if (first) return first.focus();
   const sub = cartSub(), ref = 'FP-' + Date.now().toString(36).toUpperCase();
-  store.set('frao-last-order', { ref, ...v, total: sub + shipFor(sub), items: cart });
+  store.set('frao-last-order', Object.assign({ ref: ref }, v, { total: sub + shipFor(sub), items: cart }));
   cart = []; saveCart();
   location.hash = '#/merci/' + ref;
 });

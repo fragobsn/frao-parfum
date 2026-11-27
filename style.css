@@ -112,3 +112,4 @@ select,input,textarea{height:44px;border-radius:8px;border:1px solid var(--ink-2
 .footer-txt{color:var(--ink-300);font-size:14px;line-height:1.7}
 @media(max-width:720px){.header{padding:0 16px}.main{padding:0 16px}.cart{grid-template-columns:1fr}.line{flex-wrap:wrap}.form{grid-template-columns:1fr}.hero{padding-top:40px}.banner{padding:32px}.footer-in{padding:40px 16px}.logo{font-size:18px}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+#toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);background:var(--ink-900);color:var(--paper-0);padding:14px 22px;border-radius:999px;font:600 14px Archivo;opacity:0;pointer-events:none;transition:all .25s;z-index:20;max-width:90vw;text-align:center}#toast.show{opacity:1;transform:translate(-50%,0)}
