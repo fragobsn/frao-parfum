@@ -1,0 +1,11 @@
+:root{
+--font-display:"Archivo","Helvetica Neue",Arial,sans-serif;
+--font-body:"Archivo","Helvetica Neue",Arial,sans-serif;
+--font-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+--wdth-display:112;/* @kind font */--wdth-body:100;/* @kind font */--wdth-label:88;/* @kind font */
+--fs-display-xl:96px;--fs-display-l:68px;--fs-h1:48px;--fs-h2:34px;--fs-h3:24px;--fs-h4:19px;
+--fs-body-l:18px;--fs-body:16px;--fs-small:14px;--fs-caption:12px;--fs-metric-xl:72px;--fs-metric:36px;
+--lh-tight:.94;/* @kind font */--lh-heading:1.08;/* @kind font */--lh-body:1.55;/* @kind font */--lh-snug:1.3;/* @kind font */
+--tr-display:-.035em;/* @kind font */--tr-heading:-.02em;/* @kind font */--tr-body:0;/* @kind font */--tr-label:.1em;/* @kind font */
+--fw-regular:400;/* @kind font */--fw-medium:500;/* @kind font */--fw-semibold:600;/* @kind font */--fw-bold:700;/* @kind font */--fw-black:800;/* @kind font */
+}
