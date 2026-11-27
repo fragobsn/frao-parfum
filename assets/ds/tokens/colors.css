@@ -1,0 +1,21 @@
+:root{
+/* Ink — neutrals pulled from the Black band */
+--ink-950:#0E0F0D;--ink-900:#161714;--ink-800:#242622;--ink-700:#3A3D38;--ink-500:#62665F;--ink-400:#8A8E86;--ink-300:#B1B4AC;--ink-200:#D3D4CE;--ink-100:#E7E6E0;
+/* Paper — warm off-whites, the Beige band's light end */
+--paper-50:#F3F1EA;--paper-0:#FAF9F5;--white:#FFFFFF;
+/* Brand */
+--teal-900:#123536;--teal-700:#1D4E4F;--teal-500:#2F6E6D;--teal-100:#D7E4E1;
+--pulse-400:#D4EE7A;--pulse-600:#A9C94A;
+/* Colorways — WP-1 strap colors */
+--band-beige:#D6C8AE;--band-black:#1B1B1A;--band-dark-blue:#1F2B45;--band-dark-green:#24392D;--band-deep-teal:#1D4E4F;--band-light-gray:#C8CAC6;--band-light-green:#B8D2A6;--band-clear:rgba(220,224,222,.55);
+/* Semantic */
+--success-600:#2E7A4E;--success-100:#DCEBDF;--warning-600:#A86B12;--warning-100:#F3E5C8;--danger-600:#B0402C;--danger-100:#F3DAD3;--info-600:var(--teal-500);--info-100:var(--teal-100);
+/* Aliases */
+--bg-page:var(--paper-0);--bg-subtle:var(--paper-50);--bg-inverse:var(--ink-900);
+--surface-card:var(--white);--surface-raised:var(--white);--surface-sunken:var(--paper-50);--surface-inverse:var(--ink-900);
+--fg-1:var(--ink-900);--fg-2:var(--ink-500);--fg-3:var(--ink-400);--fg-inverse:var(--paper-0);--fg-inverse-2:var(--ink-300);
+--text-body:var(--fg-1);--text-muted:var(--fg-2);--text-link:var(--teal-700);
+--border-1:var(--ink-100);--border-2:var(--ink-200);--border-strong:var(--ink-900);--border-inverse:var(--ink-700);
+--accent:var(--teal-700);--accent-hover:var(--teal-900);--accent-soft:var(--teal-100);--accent-fg:var(--paper-0);
+--signal:var(--pulse-400);--focus-ring:var(--teal-500);
+}
